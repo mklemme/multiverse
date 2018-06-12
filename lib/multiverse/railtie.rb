@@ -48,7 +48,9 @@ module Multiverse
             ActiveRecord::Base.establish_connection
 
             # need this to run again if environment is loaded afterwards
-            Rake::Task["db:load_config"].reenable
+            if Rake::Task["db:load_config"].present?
+              Rake::Task["db:load_config"].reenable
+            end
           end
         end
       end
