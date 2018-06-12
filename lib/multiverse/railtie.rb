@@ -54,9 +54,11 @@ module Multiverse
           end
         end
       end
-
-      Rake::Task["db:load_config"].enhance do
-        Rake::Task["multiverse:load_config"].execute
+      
+      if Rake::Task["db:load_config"].present?
+        Rake::Task["db:load_config"].enhance do
+          Rake::Task["multiverse:load_config"].execute
+        end
       end
     end
   end
